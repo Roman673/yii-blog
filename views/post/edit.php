@@ -2,13 +2,11 @@
 use yii\helpers\Url;
 
 $this->title = 'Edit';
+$this->params['breadcrumbs'][] = [
+    'label' => $post->title,
+    'url' => Url::to(['post/view', 'id' => $post->id]),
+    ];
 ?>
-<ul class="breadcrumb">
-    <li><a href="<?= Url::to(['post/index']) ?>">Home</a></li>
-    <li><a href="<?= Url::to(['post/view', 'id' => $post->id]) ?>"><?= $post->title ?></a></li>
-    <li><?= $this->title ?></li>
-</ul>
-
 <form action="<?= Url::to(['post/update', 'id' => $post->id]) ?>" method="post">
     <input type="hidden" name="_csrf" value="<?= Yii::$app->getRequest()->getCsrfToken() ?>">
 

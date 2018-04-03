@@ -4,6 +4,11 @@ use yii\helpers\Url;
 use app\assets\BaseAsset;
 
 BaseAsset::register($this);
+
+$this->registerLinkTag([
+    'rel' => 'stylesheet',   
+    'href' => 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css',
+]);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -14,24 +19,74 @@ BaseAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <?php $this->head() ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
-    <div id="mySidenav" class="sidenav">
-        <a id="closeNav" href="#" class="closebtn">&times;</a>
-        <a href="<?= Url::to(['post/index']) ?>">Home</a>
+<div class="grid-container">
+    <?php if(Yii::$app->session->hasFlash('success')): ?>
+        <div class="alert alert-success">
+            <span class="closebtn">&times;</span>
+            <strong>Success!</strong> <?= Yii::$app->session->getFlash('success') ?>
+        </div>
+    <?php endif; ?>
+    <header>
+        <h1>My Blog</h1>
+        <p>Consectetur hic inventore nesciunt minima?</p>
+    </header>
+
+    <nav>
+        <?php
+            $url = \Yii::$app->request->url;
+            $home = Url::to(['post/index']);
+            $about = Url::to(['post/about']);
+            $create = Url::to(['post/create']);
+        ?>
+        <a href="<?= $home ?>" <? if($url == $home): ?>class="active"<? endif; ?>>Home</a>
         <a href="#">Services</a>
         <a href="#">Clients</a>
         <a href="#">Contact</a>
-        <a href="<?= Url::to(['post/about']) ?>">About</a>
-    </div>
+        <a href="<?= $about ?>" <? if($url == $about): ?>class="active"<? endif; ?>>About</a>
+        <a href="#" class="right">Log In</a>
+        <a href="<?= $create ?>" <? if($url == $create): ?>class="right active"<? else: ?>class="right"<? endif; ?>>Create</a>
+    </nav>
 
-    <div id="main">
-        <button id="openNav" class="btn"><i class="fa fa-bars"> Menu</i></button>
-    <?= $content ?>
-    </div>
+<?php if($url !== $home): ?>
+    <ul class="breadcrumb">
+        <li><a href="<?= $home ?>">Home</a></li>
+        <? if(isset($this->params['breadcrumbs'])): ?>
+            <? foreach($this->params['breadcrumbs'] as $key => $value): ?>
+                <li><a href="<?= $value['url'] ?>"><?= $value['label'] ?></a></li>
+            <? endforeach; ?>
+        <? endif; ?>
+        <li><?= $this->title ?></li>
+    </ul>
+<?php endif; ?>
+
+    <aside>
+        <h2>Aside</h2>
+        <ul>
+            <li>item1</li>
+            <li>item2</li>
+            <li>item3</li>
+            <li>item4</li>
+            <li>item5</li>
+            <li>item6</li>
+            <li>item7</li>
+            <li>item8</li>
+            <li>item9</li>
+        </ul>
+    </aside>
+
+    <main>
+        <?= $content ?>
+    </main>
+
+    <footer>
+        <h2>Footer</h2>
+        <p>Adipisicing possimus corporis impedit illo.</p>
+    </footer>
+</div><!-- /.grid-container -->
 <?php $this->endBody() ?>
 </body>
 </html>

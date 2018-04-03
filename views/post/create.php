@@ -4,11 +4,6 @@ use yii\helpers\Url;
 
 $this->title = 'Create';
 ?>
-<ul class="breadcrumb">
-    <li><a href="<?= Url::to(['post/index']) ?>">Home</a></li>
-    <li><?= $this->title ?></li>
-</ul>
-
 <form action="<?= Url::to(['post/store']) ?>" method="post">
     <input type="hidden" name="_csrf" value="<?= Yii::$app->getRequest()->getCsrfToken() ?>">
 

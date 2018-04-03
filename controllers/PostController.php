@@ -44,6 +44,7 @@ class PostController extends Controller
 
         if ($post->validate()) {
             $post->save();
+            Yii::$app->session->setFlash('success', 'Post created.');
             return $this->redirect(['view', 'id' => $post->id]);
         } else {
             $errors = $post->errors;
@@ -71,13 +72,17 @@ class PostController extends Controller
 
         $post->save();
 
+        Yii::$app->session->setFlash('success', 'Post updated');
+
         return $this->redirect(['view', 'id' => $post->id]);
     }
 
-    public function actionDestroy($id)
+    public function actionDelete($id)
     {
         $post = Post::findOne($id);
-        
+
+        Yii::$app->session->setFlash('success', 'Post deleted.');
+
         $post->delete();
 
         return $this->redirect(['index']);
