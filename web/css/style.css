@@ -167,6 +167,16 @@ ul.breadcrumb li + li:before {
   color: black;
   content: "/\00a0";
 }
+.comment{
+  margin: 10px 0;
+  padding: 10px;
+  border: 2px solid #dedede;
+  border-radius: 5px;
+  background-color: #f1f1f1;
+}
+.comment-time{
+  color: #aaa;
+}
 @media screen and (max-width: 768px) {
   .grid-container{
     grid-template-areas:

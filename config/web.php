@@ -56,6 +56,7 @@ $config = [
                 'posts/<id:\d+>/edit' => 'post/edit',
                 'POST posts/<id:\d+>/update' => 'post/update',
                 'POST posts/<id:\d+>/delete' => 'post/delete',
+                'POST comments/<post_id:\d+>/store' => 'comment/store',
                 'about' => 'post/about',
             ],
         ],

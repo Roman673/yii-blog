@@ -10,8 +10,20 @@ $this->title = $post->title;
     <input type="hidden" name="_csrf" value="<?= Yii::$app->getRequest()->getCsrfToken() ?>">
     <button class="btn btn-danger" type="submit"><i class="fa fa-trash-o"> Delete</i></button>
 </form>
-<section>
+<div>
     <h1><?= $post->title ?></h1>
     <hr>
     <p><?= $post->body ?></p>
-</section>
+</div>
+<form action="<?= Url::to(['comment/store', 'post_id' => $post->id]) ?>" method="post">
+    <input type="hidden" name="_csrf" value="<?= Yii::$app->getRequest()->getCsrfToken() ?>">
+    <textarea id="" class="field" name="body" placeholder="Enter your comments" rows="5"></textarea>
+    <button class="btn btn-success" type="submit">Send</button>
+</form>
+<br>
+<?php foreach($post->comments as $comment): ?>
+  <div class="comment">
+    <p><?= $comment->body ?></p>
+    <span class="comment-time"><?= $comment->created_at ?></span>
+  </div>
+<?php endforeach; ?>
