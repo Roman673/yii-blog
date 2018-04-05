@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use yii\web\Controller;
 use app\models\Post;
+use app\models\View;
 
 class PostController extends Controller
 {
@@ -23,6 +24,18 @@ class PostController extends Controller
     {
         $post = Post::findOne($id);
 
+        $view = View::find()
+            ->where(['post_id' => $post->id])
+            ->one();
+
+        if (!$view) {
+            $view = new View();
+            $view->post_id = $post->id;
+            $view->user_ip = Yii::$app->request->userIP;
+            $view->created_at = date('Y-m-d H:i:s', time());
+            $view->save();
+        }
+
         return $this->render('view', [
             'post' => $post,
         ]);
@@ -36,18 +49,20 @@ class PostController extends Controller
     public function actionStore()
     {
         $request = Yii::$app->request;
-
+        $session = Yii::$app->session;
         $post = new Post();
 
         $post->title = $request->post('title');
         $post->body = $request->post('body');
+        $post->created_at = date('Y-m-d H:i:s', time());
+        $post->updated_at = date('Y-m-d H:i:s', time());
 
         if ($post->validate()) {
             $post->save();
-            Yii::$app->session->setFlash('success', 'Post created.');
+            $session->setFlash('success', 'Post created.');
             return $this->redirect(['view', 'id' => $post->id]);
         } else {
-            $errors = $post->errors;
+            $session->setFlash('danger', $post->errors);
             return $this->redirect(['create']);
         }
     }
@@ -69,6 +84,7 @@ class PostController extends Controller
 
         $post->title = $request->post('title');
         $post->body = $request->post('body');
+        $post->updated_at = date('Y-m-d H:i:s', time());
 
         $post->save();
 
@@ -80,6 +96,16 @@ class PostController extends Controller
     public function actionDelete($id)
     {
         $post = Post::findOne($id);
+
+        $views = View::find()
+            ->where(['post_id' => $post->id])
+            ->all();
+
+        if ($views) {
+            foreach ($views as $view) {
+                $view->delete();
+            }
+        } 
 
         Yii::$app->session->setFlash('success', 'Post deleted.');
 

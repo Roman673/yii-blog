@@ -3,32 +3,31 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `comments`.
+ * Handles the creation of table `views`.
  */
-class m180404_091959_create_comments_table extends Migration
+class m180405_064707_create_views_table extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->createTable('comments', [
+        $this->createTable('views', [
             'id' => $this->primaryKey(),
-            'body' => $this->text()->notNull(),
             'post_id' => $this->integer()->notNull(),
+            'user_ip' => $this->string(20)->notNull(),
             'created_at' => $this->dateTime(),
-            'updated_at' => $this->dateTime()
         ]);
 
         $this->createIndex(
-            'idx-comments-post_id',
-            'comments',
+            'idx-views-post_id',
+            'views',
             'post_id'
         );
 
         $this->addForeignKey(
-            'fk-comments-post_id',
-            'comments',
+            'fk-views-post_id',
+            'views',
             'post_id',
             'posts',
             'id',
@@ -42,15 +41,15 @@ class m180404_091959_create_comments_table extends Migration
     public function safeDown()
     {
         $this->dropForeignKey(
-            'fk-comments-post_id',
-            'comments'
+            'fk-views-post_id',
+            'views'
         );
 
         $this->dropIndex(
-            'idx-comments-post_id',
-            'comments'
+            'idx-views-post_id',
+            'views'
         );
 
-        $this->dropTable('comments');
+        $this->dropTable('views');
     }
 }

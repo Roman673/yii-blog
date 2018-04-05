@@ -73,8 +73,11 @@ footer {
   grid-area: alert;
   padding: 20px;
   color: white;
+  opacity: 1;
+  transition: opacity 0.6s;
 }
 .alert-success{ background-color: #4caf50;}
+.alert-danger{ background-color: #f44336;}
 .closebtn{
   margin-left: 15px;
   color: white;
@@ -143,6 +146,19 @@ footer {
 .btn-outline-default:hover {
   background-color: #e7e7e7;
 }
+
+/* Tag */
+.tag{
+  color: white;
+  padding: 8px;
+  font-family: Arial, sans-serif;
+}
+.tag-default{ background-color: #e7e7e7; color: black }
+.tag-success{ background-color: #4caf50 }
+.tag-info{ background-color: #2196f3 }
+.tag-warning{ background-color: #ff9800 }
+.tag-danger{ background-color: #f44336 }
+
 /* Breadcrumb */
 ul.breadcrumb {
   grid-area: breadcrumb;
@@ -170,9 +186,17 @@ ul.breadcrumb li + li:before {
 .comment{
   margin: 10px 0;
   padding: 10px;
-  border: 2px solid #dedede;
+  border-width: 2px;
+  border-style: solid;
   border-radius: 5px;
+}
+.comment:nth-child(odd){
+  border-color: #dedede;
   background-color: #f1f1f1;
+}
+.comment:nth-child(even){
+  border-color: #ccc;
+  background-color: #ddd;
 }
 .comment-time{
   color: #aaa;

@@ -9,6 +9,7 @@ $this->registerLinkTag([
     'rel' => 'stylesheet',   
     'href' => 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css',
 ]);
+$session = Yii::$app->session;
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -24,11 +25,19 @@ $this->registerLinkTag([
 <body>
 <?php $this->beginBody() ?>
 <div class="grid-container">
-    <?php if(Yii::$app->session->hasFlash('success')): ?>
+    <?php if($session->hasFlash('success')): ?>
         <div class="alert alert-success">
             <span class="closebtn">&times;</span>
-            <strong>Success!</strong> <?= Yii::$app->session->getFlash('success') ?>
+            <strong>Success!</strong> <?= $session->getFlash('success') ?>
         </div>
+    <?php endif; ?>
+    <?php if($session->hasFlash('danger')): ?>
+        <?php foreach($session->getFlash('danger') as $danger): ?>
+            <div class="alert alert-danger">
+                <span class="closebtn">&times;</span>
+                <strong>Danger!</strong> <?= $danger[0] ?>
+            </div>
+        <?php endforeach; ?>
     <?php endif; ?>
     <header>
         <h1>My Blog</h1>
@@ -41,8 +50,10 @@ $this->registerLinkTag([
             $home = Url::to(['post/index']);
             $about = Url::to(['post/about']);
             $create = Url::to(['post/create']);
+            $tags = Url::to(['tag/index']);
         ?>
         <a href="<?= $home ?>" <? if($url == $home): ?>class="active"<? endif; ?>>Home</a>
+        <a href="<?= $tags ?>" <?php if($url == $tags): ?>class="active"<?php endif; ?>>Tags</a>
         <a href="#">Services</a>
         <a href="#">Clients</a>
         <a href="#">Contact</a>

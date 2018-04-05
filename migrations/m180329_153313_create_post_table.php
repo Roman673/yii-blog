@@ -12,10 +12,12 @@ class m180329_153313_create_post_table extends Migration
      */
     public function safeUp()
     {
-        $this->createTable('post', [
+        $this->createTable('posts', [
             'id' => $this->primaryKey(),
-            'title' => $this->string(),
-            'body' => $this->text(),
+            'title' => $this->string()->notNull(),
+            'body' => $this->text()->notNull(),
+            'created_at' => $this->dateTime(),
+            'updated_at' => $this->dateTime()
         ]);
     }
 
@@ -24,6 +26,6 @@ class m180329_153313_create_post_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('post');
+        $this->dropTable('posts');
     }
 }

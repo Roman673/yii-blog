@@ -11,7 +11,9 @@ $this->title = $post->title;
     <button class="btn btn-danger" type="submit"><i class="fa fa-trash-o"> Delete</i></button>
 </form>
 <div>
-    <h1><?= $post->title ?></h1>
+    <h1 style="margin-bottom:0"><?= $post->title ?></h1>
+    <h3 style="margin:0;color:grey"><?= Count($post->views) ?> views</h3>
+    <p><i class="fa fa-clock-o"> <?= $post->publicationDate ?></i></p>
     <hr>
     <p><?= $post->body ?></p>
 </div>
