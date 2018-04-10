@@ -1,9 +1,9 @@
 # Blog on Yii2
 - [x] Create Alert widger
-- [ ] Change Destroy button from modal
-- [ ] Add Comment
+- [x] Change Destroy button from modal
+- [x] Add Comment
 - [x] Add View counter
-- [ ] Add Tags
-- [ ] Add Like / Dislite buttons
+- [x] Add Tags
+- [ ] Add Like / Dislike buttons
 - [ ] Add authorization:
 - [ ] Add Profile

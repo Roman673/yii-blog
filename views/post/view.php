@@ -32,6 +32,11 @@ $this->title = $post->title;
     <p><i class="fa fa-clock-o"> <?= $post->publicationDate ?></i></p>
     <hr>
     <p><?= $post->body ?></p>
+    <p>    
+    <?php foreach($post->tags as $tag): ?>
+        <span class="tag tag-<?= $tag->status ?>"><?= $tag->title ?></span>
+    <?php endforeach; ?>
+    </p>
 </div>
 <form action="<?= Url::to(['comment/store', 'post_id' => $post->id]) ?>" method="post">
     <input type="hidden" name="_csrf" value="<?= Yii::$app->getRequest()->getCsrfToken() ?>">

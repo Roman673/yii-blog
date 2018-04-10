@@ -16,6 +16,17 @@ $this->params['breadcrumbs'][] = [
     <label for="Body">Body</label>
     <textarea class="field" id="body" name="body" cols="30" rows="10" placeholder="Write something.."><?= $post->body ?></textarea>
 
+    <label for="tags">Tags</label>
+    <select id="tags" name="tags[]" class="field" multiple="">
+        <?php foreach($tags as $tag): ?>
+        <option value="<?= $tag->id ?>"
+        <?php foreach($post->tags as $selected_tag): ?>
+            <?php if($tag == $selected_tag): ?>selected<?php endif; ?>
+        <?php endforeach; ?>
+        ><?= $tag->title ?></option>
+        <?php endforeach; ?>
+    </select>
+
     <input class="btn btn-success" type="submit" value="Submit">
 </form>
 

@@ -16,6 +16,11 @@ body {
   grid-template-columns: 25% 1fr;
 }
 a { text-decoration: none; }
+hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+}
 header {
   grid-area: header;
   padding: 40px;
