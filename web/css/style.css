@@ -52,8 +52,7 @@ nav a.active {
 }
 aside {
   grid-area: sidebar;
-  background-color: #f1f1f1;
-  padding: 30px;
+  background-color: white;
 }
 main {
   grid-area: main;

@@ -1,4 +1,5 @@
 <?php
+use yii\helpers\Html;
 use yii\helpers\Url;
 
 $this->title = $post->title;
@@ -27,11 +28,11 @@ $this->title = $post->title;
     <input type="hidden" name="_csrf" value="<?= Yii::$app->getRequest()->getCsrfToken() ?>">
 </form>
 <div>
-    <h1 style="margin-bottom:0"><?= $post->title ?></h1>
-    <h3 style="margin:0;color:grey"><?= Count($post->views) ?> views</h3>
+    <h1 style="margin-bottom:0"><?= Html::encode($post->title) ?></h1>
+    <h3 style="margin:0;color:grey"><?= $post->number_views ?> views</h3>
     <p><i class="fa fa-clock-o"> <?= $post->publicationDate ?></i></p>
     <hr>
-    <p><?= $post->body ?></p>
+    <p><?= Html::encode($post->body) ?></p>
     <p>    
     <?php foreach($post->tags as $tag): ?>
         <span class="tag tag-<?= $tag->status ?>"><?= $tag->title ?></span>
@@ -40,14 +41,14 @@ $this->title = $post->title;
 </div>
 <form action="<?= Url::to(['comment/store', 'post_id' => $post->id]) ?>" method="post">
     <input type="hidden" name="_csrf" value="<?= Yii::$app->getRequest()->getCsrfToken() ?>">
-    <textarea id="" class="field" name="body" placeholder="Enter your comments" rows="5"></textarea>
+    <textarea id="" class="field" name="Comment[body]" placeholder="Enter your comments" rows="5"></textarea>
     <button class="btn btn-success" type="submit">Send</button>
 </form>
 <br>
-<?= Count($post->comments) ?> Comments
+<?= $post->number_comments ?> Comments
 <?php foreach($post->comments as $comment): ?>
   <div class="comment">
-    <p><?= $comment->body ?></p>
+    <p><?= Html::encode($comment->body) ?></p>
     <span class="comment-time"><?= $comment->created_at ?></span>
   </div>
 <?php endforeach; ?>

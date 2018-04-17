@@ -17,11 +17,18 @@ class m180405_113357_create_junction_table_for_post_and_tag_tables extends Migra
     public function safeUp()
     {
         $this->createTable('post_tag', [
-            'post_id' => $this->integer(),
-            'tag_id' => $this->integer(),
-            'created_at' => $this->dateTime(),
-            'PRIMARY KEY(post_id, tag_id)',
+            'post_id' => $this->integer()->notNull(),
+            'tag_id' => $this->integer()->notNull(),
         ]);
+
+        $this->addPrimaryKey(
+            'pk-post_tag',
+            'post_tag',
+            [
+                'post_id',
+                'tag_id'
+            ]
+        );
 
         // creates index for column `post_id`
         $this->createIndex(

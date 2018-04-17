@@ -13,11 +13,20 @@ class m180405_064707_create_views_table extends Migration
     public function safeUp()
     {
         $this->createTable('views', [
-            'id' => $this->primaryKey(),
             'post_id' => $this->integer()->notNull(),
             'user_ip' => $this->string(20)->notNull(),
             'created_at' => $this->dateTime(),
+            'updated_at' => $this->dateTime(),
         ]);
+
+        $this->addPrimaryKey(
+            'pk-views',
+            'views',
+            [
+                'post_id',
+                'user_ip'
+            ]
+        );
 
         $this->createIndex(
             'idx-views-post_id',

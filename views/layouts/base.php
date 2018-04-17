@@ -75,18 +75,14 @@ $session = Yii::$app->session;
 <?php endif; ?>
 
     <aside>
-        <h2>Aside</h2>
-        <ul>
-            <li>item1</li>
-            <li>item2</li>
-            <li>item3</li>
-            <li>item4</li>
-            <li>item5</li>
-            <li>item6</li>
-            <li>item7</li>
-            <li>item8</li>
-            <li>item9</li>
-        </ul>
+      <div style="margin-bottom:15px;padding:15px;background:#f1f1f1">
+        <h2>Sidebar 1</h2>
+        <p>Adipisicing dolor veritatis explicabo consequuntur laudantium maiores adipisci? Aliquid dolorum aperiam atque eum quaerat! Fugit dolores aperiam mollitia possimus incidunt. Commodi nostrum perferendis ea debitis sunt dolor? Quaerat sapiente architecto quae voluptatibus numquam perferendis dolor voluptate. Sequi reiciendis veniam accusamus maiores aut quas tenetur. Unde quas eius repellendus illum sequi!</p>
+      </div>
+      <div style="padding:15px;background:#f1f1f1">
+        <h2>Sidebar 2</h2>
+        <p>Adipisicing dolor veritatis explicabo consequuntur laudantium maiores adipisci? Aliquid dolorum aperiam atque eum quaerat! Fugit dolores aperiam mollitia possimus incidunt. Commodi nostrum perferendis ea debitis sunt dolor? Quaerat sapiente architecto quae voluptatibus numquam perferendis dolor voluptate. Sequi reiciendis veniam accusamus maiores aut quas tenetur. Unde quas eius repellendus illum sequi!</p>
+      </div>
     </aside>
 
     <main>

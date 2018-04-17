@@ -16,8 +16,10 @@ class m180329_153313_create_post_table extends Migration
             'id' => $this->primaryKey(),
             'title' => $this->string()->notNull(),
             'body' => $this->text()->notNull(),
-            'created_at' => $this->dateTime(),
-            'updated_at' => $this->dateTime()
+            'number_views' => $this->integer()->notNull()->defaultValue(0),
+            'number_comments' => $this->integer()->notNull()->defaultValue(0),
+            'created_at' => $this->dateTime()->notNull(),
+            'updated_at' => $this->dateTime()->notNull()
         ]);
     }
 

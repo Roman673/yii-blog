@@ -5,21 +5,27 @@ namespace app\controllers;
 use Yii;
 use yii\web\Controller;
 use app\models\Comment;
+use app\models\Post;
 
 class CommentController extends Controller
 {
     public function actionStore($post_id)
     {
-        $request = Yii::$app->request;
-
+        $session = Yii::$app->session;
+        $post = Post::findOne($post_id);
         $comment = new Comment();
-        $comment->body = $request->post('body');
-        $comment->post_id = $post_id;
-        $comment->created_at = date('Y-m-d H:i:s', time());
         
-        if ($comment->validate()) {
+        if ($comment->load(Yii::$app->request->post(), 'Comment') && $comment->validate()) {
+            $comment->link('post', $post);
             $comment->save();
-            Yii::$app->session->setFlash('success', 'Comment created.');
+
+            $post->updateCounters(['number_comments' => 1]);
+            $post->save();
+
+            $session->setFlash('success', 'Comment created.');
+        } else {
+            $session->setFlash('danger', $comment->errors);
+            $errors = $comment->errors;
         }
         
         return $this->redirect(['post/view', 'id' => $post_id]);
